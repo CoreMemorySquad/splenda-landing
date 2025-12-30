@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Próximamente</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #000;
+        }
+
+        /* Contenedor principal */
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Imagen de fondo con blur - solo en navegadores que soporten backdrop-filter */
+        @supports (backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px)) {
+            .container::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: url('proximamente.png');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                filter: blur(20px);
+                transform: scale(1.1); /* Evita bordes blancos del blur */
+                z-index: 1;
+            }
+
+            /* Overlay oscuro opcional para mejorar contraste */
+            .container::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.3);
+                z-index: 2;
+            }
+        }
+
+        /* Imagen principal nítida */
+        .main-image {
+            position: relative;
+            z-index: 3;
+            max-width: 90%;
+            max-height: 90%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Responsive: ajustar tamaño en móviles */
+        @media (max-width: 768px) {
+            .main-image {
+                max-width: 85%;
+                max-height: 85%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="proximamente.png" alt="Próximamente" class="main-image">
+    </div>
+</body>
+</html>
